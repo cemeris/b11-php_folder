@@ -15,10 +15,14 @@ class Storage
         }
     }
 
+    public function getAllEntries():array {
+        return $this->data;
+    }
+
     public function getEntry($key) {
         return @$this->data[$key];
     }
-    
+
     public function addEntry($key, $value) {
         if (!isset($this->data[$key])) {
             $this->data[$key] = $value;
@@ -28,5 +32,10 @@ class Storage
 
     public function countEntries() {
         return count($this->data);
+    }
+
+    public function reset() {
+        file_put_contents($this->filename, '');
+        $this->data = [];
     }
 }
